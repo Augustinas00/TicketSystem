@@ -1,0 +1,31 @@
+﻿@model List<TicketSystem.Web.Models.Event>
+
+<h2>Admin - Manage Events</h2>
+<a asp-action="Create" class="btn">Add Event</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Venue</th>
+            <th>City</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var evt in Model)
+        {
+            <tr>
+                <td>@evt.Name</td>
+                <td>@evt.EventDate.ToShortDateString()</td>
+                <td>@evt.Venue</td>
+                <td>@evt.City</td>
+                <td>
+                    <form asp-action="Delete" asp-route-id="@evt.Id" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

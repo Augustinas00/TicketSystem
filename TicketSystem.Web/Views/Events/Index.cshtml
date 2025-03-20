@@ -1,0 +1,31 @@
+﻿@model List<TicketSystem.Web.Models.Event>
+
+<h2>Events</h2>
+<form asp-action="Index" method="get">
+    <input type="text" name="search" value="@ViewBag.Search" placeholder="Search events..." />
+    <select name="categoryId">
+        <option value="">All Categories</option>
+        <option value="1" selected="@(ViewBag.CategoryId == 1)">Music</option>
+        <option value="2" selected="@(ViewBag.CategoryId == 2)">Sports</option>
+        <option value="3" selected="@(ViewBag.CategoryId == 3)">Theater</option>
+    </select>
+    <input type="text" name="city" value="@ViewBag.City" placeholder="City..." />
+    <button type="submit" class="btn">Filter</button>
+</form>
+
+<div class="row">
+    @foreach (var evt in Model)
+    {
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <img src="@evt.ImageUrl" class="card-img-top" alt="@evt.Name">
+                <div class="card-body">
+                    <h5 class="card-title">@evt.Name</h5>
+                    <p class="card-text">@evt.EventDate.ToShortDateString() - @evt.City</p>
+                    <p class="card-text">@evt.Description</p>
+                    <a asp-action="Details" asp-route-id="@evt.Id" class="btn">View Details</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
